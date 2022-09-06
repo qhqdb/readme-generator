@@ -1,133 +1,47 @@
-function generateMarkdown(userResponses, userInfo) {
 
-    // Generate table of contents
-    let draftToC = `## Table of Contents`;
-    if (userResponses.installation !== '') { draftToC += `
-    * [Installation](#installation)` };
-    if (userResponses.usage !== '') { draftToC += `
-    * [Usage](#usage)` };
-    if (userResponses.contributing !== '') { draftToC += `
-    * [Contributing](#contributing)` };
-    if (userResponses.tests !== '') { draftToC += `
-    * [Tests](#tests)` };
+function generateMarkdown(answers) {
+    return `
+<h1 align="center">${answers.projectTitle} </h1>
   
-    // Generate markdown for top required portions of the README
-    let draftMarkdown = 
-    `# ${userResponses.title}
-  
-    ![Badge for GitHub repo top language](https://img.shields.io/github/languages/top/${userResponses.username}/${userResponses.repo}?style=flat&logo=appveyor) ![Badge for GitHub last commit](https://img.shields.io/github/last-commit/${userResponses.username}/${userResponses.repo}?style=flat&logo=appveyor)
-    
-    Check out the badges hosted by [shields.io](https://shields.io/).
-    
-    
-    ## Description 
-    
-    *The what, why, and how:* 
-    
-    ${userResponses.description}
-  
-    `
-  
-    // add Table of Contents
-    draftMarkdown += draftToC;
-   
-    // add license
-    draftMarkdown += `
-    * [License](#license)`;
-    
-  
-    // add installation
-    if (userResponses.installation !== '') {
-    draftMarkdown +=
-    `
+![badge](https://img.shields.io/badge/license-${answers.license}-brightgreen)<br />
 
-    ## Installation
-    
-    *Steps required to install project and how to get the development environment running:*
-    
-    ${userResponses.installation}`
-    };
-    
-    // add usage
-    if (userResponses.usage !== '') {
-    draftMarkdown +=
-    
-    `
-    
-    ## Usage 
-    
-    *Instructions and examples for use:*
-    
-    ${userResponses.usage}`
-    };
-    
-    // add contributors
-    if (userResponses.contributing !== '') {
-  
-    draftMarkdown +=
-      
-    `
-    
-    ## Contributing
-    
-    *If you would like to contribute it, you can follow these guidelines for how to do so.*
-    
-    ${userResponses.contributing}`
-    };
-    
-    // add tests
-    if (userResponses.tests !== '') {
-    
-    draftMarkdown +=
-    `
-    
-    ## Tests
-    
-    *Tests for application and how to run them:*
-    
-    ${userResponses.tests}`
-    };
-  
-    // license
-    draftMarkdown +=
-    `
-    
-    ## License
-    
-    ${userResponses.license}
+## Description
+${answers.description}
+
+## Table of Contents
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [Questions](#questions)
+
+## Installation
+${answers.installation}
+
+## Usage
+${answers.usage}
+
+## License
+![badge](https://img.shields.io/badge/license-${answers.license}-brightgreen)
+<br />
+This application is covered by the ${answers.license} license. 
+
+## Contributing
+${answers.contributing}
+
+## Tests
+${answers.tests}
+
+## Questions
+✋ ${answers.questions}<br />
+<br />
+Find me on GitHub: [${answers.username}](https://github.com/${answers.username})<br />
+<br />
+Email me with any questions: ${answers.email}<br /><br />
+
     `;
-  
-  
-    // questions
-    let draftDev = 
-    `
-    ---
-    
-    ## Questions?
-  
-    <img src="${userInfo.avatar_url}" alt="${userInfo.login}" width="40%" />
-    
-    For any questions, please contact me with the information below:
-   
-    GitHub: [@${userInfo.login}](${userInfo.url})
-    `;
-  
-    // add GitHub email to developer section
-    if (userInfo.email !== null) {
-    
-    draftDev +=
-    `
-  
-    Email: ${userInfo.email}
-  
-    `};
-  
-    // Add developer section
-    draftMarkdown += draftDev;
-  
-    // Return markdown
-    return draftMarkdown;
-    
   }
   
   module.exports = generateMarkdown;

@@ -1,47 +1,84 @@
+// Declares dependencies and variables
+const fs = require("fs");
+const util = require("util");
+const inquirer = require("inquirer");
+const generateReadme = require("./utils/generateReadme")
+const writeFileAsync = util.promisify(fs.writeFile);
 
-function generateMarkdown(answers) {
-    return `
-<h1 align="center">${answers.projectTitle} </h1>
-  
-![badge](https://img.shields.io/badge/license-${answers.license}-brightgreen)<br />
+//Prompts questions to populate the readme
+function promptUser(){
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "projectTitle",
+            message: "What is the project title?",
+        },
+        {
+            type: "input",
+            name: "description",
+            message: "Write a brief description of your project:"
+        },
+        {
+            type: "input",
+            name: "installation",
+            message: "Describe the installation process if any:",
+        },
+        {
+            type: "input",
+            name: "usage",
+            message: "What is this project used for?"
+        },
+        {
+            type: "list",
+            name: "license",
+            message: "Chose the appropriate license for this project: ",
+            choices: [
+                "Apache",
+                "Academic",
+                "GNU",
+                "ISC",
+                "MIT",
+                "Mozilla",
+                "Open"
+            ]
+        },
+        {
+            type: "input",
+            name: "contributing",
+            message: "Who are the contributors of this projects?"
+        },
+        {
+            type: "input",
+            name: "tests",
+            message: "Is there a test included?"
+        },
+        {
+            type: "input",
+            name: "questions",
+            message: "What do I do if I have an issue?"
+        },
+        {
+            type: "input",
+            name: "username",
+            message: "Please enter your GitHub username:"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "Please enter your email:"
+        }
+    ]);
+} 
 
-## Description
-${answers.description}
-
-## Table of Contents
-- [Description](#description)
-- [Installation](#installation)
-- [Usage](#usage)
-- [License](#license)
-- [Contributing](#contributing)
-- [Tests](#tests)
-- [Questions](#questions)
-
-## Installation
-${answers.installation}
-
-## Usage
-${answers.usage}
-
-## License
-![badge](https://img.shields.io/badge/license-${answers.license}-brightgreen)
-<br />
-This application is covered by the ${answers.license} license. 
-
-## Contributing
-${answers.contributing}
-
-## Tests
-${answers.tests}
-
-## Questions
-✋ ${answers.questions}<br />
-<br />
-Find me on GitHub: [${answers.username}](https://github.com/${answers.username})<br />
-<br />
-Email me with any questions: ${answers.email}<br /><br />
-
-    `;
+  async function init() {
+    try {
+        const answers = await promptUser();
+        const generateContent = generateReadme(answers);
+        await writeFileAsync('./dist/README.md', generateContent);
+        console.log('✔️  Successfully wrote to README.md');
+    }   catch(err) {
+        console.log(err);
+    }
   }
   
-  module.exports = generateMarkdown;
+  init();  
