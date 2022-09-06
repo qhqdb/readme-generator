@@ -2,7 +2,7 @@
 const fs = require("fs");
 const util = require("util");
 const inquirer = require("inquirer");
-const generateReadme = require("./utils/generateReadme")
+const generateReadme = require("./utils/generateMarkdown")
 const writeFileAsync = util.promisify(fs.writeFile);
 
 //Prompts questions to populate the readme
@@ -26,7 +26,7 @@ function promptUser(){
         {
             type: "input",
             name: "usage",
-            message: "What is this project used for?"
+            message: "How to use:"
         },
         {
             type: "list",
