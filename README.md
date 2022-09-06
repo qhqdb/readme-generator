@@ -41,4 +41,4 @@ Email me with any questions: mh922@cornell.edu<br /><br />
 
 ## Demo
 
-    [](../../../../media/G7pRKA5KZQMgJ5yozz/giphy.gif)
+![Walkthrough](./assets/readmewalkthrough.gif)
