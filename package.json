@@ -1,21 +1,21 @@
 {
   "name": "readme-generator",
   "version": "1.0.0",
-  "description": "a node application that creates a professional readme based on user input criteria",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jpd61/README-generator.git"
+    "url": "git+https://github.com/west-korea/readme-generator.git"
   },
   "author": "Joseph DeWoody",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jpd61/README-generator/issues"
+    "url": "https://github.com/west-korea/readme-generator/issues"
   },
-  "homepage": "https://github.com/jpd61/README-generator#readme",
+  "homepage": "https://github.com/west-korea/readme-generator#readme",
   "dependencies": {
     "axios": "^0.19.2",
     "inquirer": "^7.3.3",
